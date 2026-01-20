@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"web-to-epub-go/internal/config"
+	"github.com/marcosevegrand/web-to-epub/internal/config"
 )
 
 // ChapterInfo contains information about a discovered chapter

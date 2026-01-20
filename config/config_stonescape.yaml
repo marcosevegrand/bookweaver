@@ -1,5 +1,5 @@
-# Configuration for StoneScape (Shadow Slave) - Madara WordPress Theme
-# Web novel/manga reading platform with chapter-based content
+# Configuration for Shadow Slave - StoneScape WordPress Theme
+# Progression fantasy web novel scraper
 
 book:
   title: "Shadow Slave"
@@ -7,20 +7,22 @@ book:
   description: "A progression fantasy web novel featuring Sunny and his journey through the Nightmare Realm"
 
 scraping:
-  startUrl: "https://stonescape.xyz/series/shadow-slave/"
+  startUrl: "https://stonescape.xyz/series/shadow-slave/ch-1/"
+  userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+  timeout: 45
   polite:
     delayMs: 2000
-    maxConcurrent: 1
+    maxConcurrent: 5
     respectRobotsTxt: true
-    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    timeout: 45
 
 navigation:
   method: "url_pattern"
   urlPattern: "https://stonescape.xyz/series/shadow-slave/ch-{number}/"
   numberStart: 1
-  numberEnd: 2741  # 0 means follow until no next chapter available
+  numberEnd: 5
+  # Fallback for next-link detection if url_pattern fails
   nextLinkSelector: "a.btn.next_page, div.nav-next a"
+  maxChapters: 2741
 
 contentDetection:
   strategy: "hybrid"
@@ -38,35 +40,22 @@ contentDetection:
     - "script"
     - "style"
     - "div.manga-reading-nav-foot"
+  textDensity:
+    minDensityScore: 0.35
+    minBlockSize: 100
+  domPosition:
+    maxDepth: 10
+    minWidth: 300
 
-textDensity:
-  minDensityScore: 0.35
-  minBlockSize: 100
-
-chapterExtraction:
+chapterExtract:
   titleSelector: "h1.c-page__title, h2.c-blog__title, .entry-title, h1"
-  titleRegex: "(?:Chapter|Ch\\.?|Episode|Ep\\.?)[\\s\\.]*(\\d+)(?:\\s*[-:]\\s*(.+))?"
-  
-  # Extract chapter number from URL as fallback
-  numberFromUrl: "ch-(\\d+)"
+  titleRegex: "(?i)(?:chapter|ch\\.?|episode|ep\\.?)[\\s\\.]*(\\d+)(?:\\s*[-:]\\s*(.+))?"
 
-metadata:
-  # Extract author from schema.org structured data if available
-  authorSelector: 'meta[name="author"]'
-  dateSelector: "time, span.post-on"
-  
-  # Series info from page meta
-  seriesNameSelector: "meta[property=\"og:title\"], title"
-  descriptionSelector: 'meta[name="description"]'
+output:
+  format: "epub"
+  outputPath: "/home/marco/ebooks/shadow-slave"
+  epubMetadata:
+    lang: "en"
+    rights: "Personal Use Only - Original Work by GuiltyThree"
+    publisher: "StoneScape"
 
-outputFormats:
-  - epub
-  - pdf
-  
-quality:
-  # Clean HTML before saving
-  cleanHtml: true
-  # Preserve formatting
-  preserveFormatting: true
-  # Remove duplicate content
-  removeDuplicates: true

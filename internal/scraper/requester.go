@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"web-to-epub-go/internal/config"
+	"github.com/marcosevegrand/web-to-epub/internal/config"
 )
 
 // Requester handles HTTP requests with rate limiting and politeness

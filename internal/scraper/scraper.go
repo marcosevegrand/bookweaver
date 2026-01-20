@@ -8,10 +8,10 @@ import (
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
-	"web-to-epub-go/internal/config"
-	"web-to-epub-go/internal/extractor"
-	"web-to-epub-go/internal/navigator"
-	"web-to-epub-go/internal/output"
+	"github.com/marcosevegrand/web-to-epub/internal/config"
+	"github.com/marcosevegrand/web-to-epub/internal/extractor"
+	"github.com/marcosevegrand/web-to-epub/internal/navigator"
+	"github.com/marcosevegrand/web-to-epub/internal/output"
 )
 
 // Chapter represents a scraped chapter

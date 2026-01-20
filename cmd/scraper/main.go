@@ -9,8 +9,8 @@ import (
 	"os"
 	"strings"
 
-	"web-to-epub-go/internal/config"
-	"web-to-epub-go/internal/scraper"
+	"github.com/marcosevegrand/web-to-epub/internal/config"
+	"github.com/marcosevegrand/web-to-epub/internal/scraper"
 )
 
 const (
