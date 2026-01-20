@@ -200,7 +200,6 @@ func sanitizeHTML(htmlContent string) string {
 	htmlContent = regexp.MustCompile(`\s+class="[^"]*"`).ReplaceAllString(htmlContent, "")
 	htmlContent = regexp.MustCompile(`\s+id="[^"]*"`).ReplaceAllString(htmlContent, "")
 	htmlContent = regexp.MustCompile(`\s+data-[a-z-]+="[^"]*"`).ReplaceAllString(htmlContent, "")
-	htmlContent = regexp.MustCompile(`<(\w+)[^>]*>\s*</\1>`).ReplaceAllString(htmlContent, "")
 
 	return strings.TrimSpace(htmlContent)
 }
